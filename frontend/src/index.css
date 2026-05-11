@@ -1,0 +1,141 @@
+/* src/index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: #f1f1f1; }
+::-webkit-scrollbar-thumb  { background: #3b82f6; border-radius: 10px; }
+
+/* ══════════════════════════════════════════
+   PRINT STYLES
+   These rules apply ONLY when printing
+   (Ctrl+P or PrintButton click)
+   ══════════════════════════════════════════ */
+@media print {
+
+  /* Hide everything that should not be in a printout */
+  .no-print,
+  aside,
+  header,
+  nav,
+  button,
+  .toast-container {
+    display: none !important;
+  }
+
+  /* Make main content fill the full page */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12px;
+  }
+
+  /* Remove shadows and rounded corners for print */
+  .bg-white,
+  .rounded-xl,
+  .shadow-sm {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Make tables print cleanly */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  th, td {
+    border: 1px solid #e5e7eb !important;
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+  }
+
+  thead {
+    background-color: #eff6ff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Page break rules */
+  tr { page-break-inside: avoid; }
+  h1, h2 { page-break-after: avoid; }
+
+  /* Print header with page info */
+  @page {
+    margin: 1.5cm;
+  }
+
+  /* Show the page title prominently */
+  h1 {
+    font-size: 18px !important;
+    color: black !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Force full width layout */
+  .flex { display: block !important; }
+  .min-w-0, .flex-1 { width: 100% !important; }
+
+  /* Make sure page content starts from top */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: #f1f1f1; }
+::-webkit-scrollbar-thumb  { background: #3b82f6; border-radius: 10px; }
+
+/* ── Dark mode scrollbar ── */
+.dark ::-webkit-scrollbar-track { background: #1f2937; }
+.dark ::-webkit-scrollbar-thumb { background: #3b82f6; }
+
+/* ── Dark mode base ── */
+/* Smooth transition when switching modes */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+/* ══════════════════════════════════════════
+   PRINT STYLES
+   ══════════════════════════════════════════ */
+@media print {
+  .no-print,
+  aside,
+  header,
+  nav,
+  button,
+  .toast-container {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12px;
+  }
+  .bg-white, .rounded-xl, .shadow-sm {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  table { width: 100% !important; border-collapse: collapse !important; }
+  th, td { border: 1px solid #e5e7eb !important; padding: 6px 10px !important; font-size: 11px !important; }
+  thead { background-color: #eff6ff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  tr { page-break-inside: avoid; }
+  h1, h2 { page-break-after: avoid; }
+  @page { margin: 1.5cm; }
+  h1 { font-size: 18px !important; color: black !important; margin-bottom: 12px !important; }
+  .flex { display: block !important; }
+  .min-w-0, .flex-1 { width: 100% !important; }
+  main { padding: 0 !important; margin: 0 !important; }
+}
