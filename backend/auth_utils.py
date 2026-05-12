@@ -19,11 +19,13 @@ from sqlalchemy.orm import Session
 from database import get_db
 import models
 
+
+import os
 # ── SECRET KEY ──────────────────────────────────────────────────
 # This key signs the JWT. Anyone with this key can forge tokens.
 # In production this should be a long random string stored in
 # an environment variable — never committed to git.
-SECRET_KEY  = "ims-super-secret-key-change-in-production-2024"
+SECRET_KEY = os.environ.get("SECRET_KEY", "ims-super-secret-key-change-in-production-2024")
 ALGORITHM   = "HS256"   # Hashing algorithm for the JWT
 
 # Token expires after 30 minutes (session timeout)

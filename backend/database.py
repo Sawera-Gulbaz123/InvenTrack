@@ -1,36 +1,32 @@
-# database.py
+# backend/database.py
 
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-# MySQL connection URL format:
-# mysql+pymysql://username:password@host:port/database_name
-#
-# mysql+pymysql  → use MySQL with pymysql driver
-# root           → your MySQL username (default is root)
-# your_password  → the password you set during MySQL installation
-# localhost      → MySQL is running on your own computer
-# 3306           → default MySQL port (like a door number)
-# inventorydb    → the database we just created
-DATABASE_URL = "mysql+pymysql://root:618507@localhost:3306/inventorydb"
+# In production Railway sets DATABASE_URL automatically
+# In development it falls back to your local MySQL
+DATABASE_URL = os.environ.get(
+    'DATABASE_URL',
+    'mysql+pymysql://root:yourpassword@localhost:3306/inventorydb'
+)
 
-# create_engine sets up the connection to MySQL
-# Note: we removed connect_args={"check_same_thread": False}
-# because that was SQLite-specific — MySQL doesn't need it
+# Railway sometimes gives mysql:// instead of mysql+pymysql://
+# This fixes it automatically
+if DATABASE_URL.startswith('mysql://'):
+    DATABASE_URL = DATABASE_URL.replace('mysql://', 'mysql+pymysql://', 1)
+
 engine = create_engine(DATABASE_URL)
 
-# Exact same as before — this is database-independent
 SessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,
     bind=engine
 )
 
-# Exact same as before
 Base = declarative_base()
 
-# Exact same as before
 def get_db():
     db = SessionLocal()
     try:
